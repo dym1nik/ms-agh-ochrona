@@ -1,0 +1,22 @@
+
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Dodaj zdarzenie{% endblock %}
+
+{% block body %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="fw-bold mb-0">Dodaj zdarzenie</h1>
+    <a href="{{ path('app_event_index') }}" class="btn btn-outline-secondary">
+        ← Powrót do listy
+    </a>
+</div>
+
+<div class="card shadow-sm">
+    <div class="card-body">
+        {{ include('event/_form.html.twig', {'button_label': 'Zapisz'}) }}
+    </div>
+</div>
+{% endblock %}
