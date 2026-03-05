@@ -1,0 +1,31 @@
+{{ form_start(form) }}
+
+<div class="mb-3">
+    {{ form_label(form.occurredAt, null, {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.occurredAt, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.occurredAt) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.description, null, {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.description, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.description) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.type, null, {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.type, {'attr': {'class': 'form-select'}}) }}
+    {{ form_errors(form.type) }}
+</div>
+
+<div class="mb-3">
+    {{ form_label(form.place, null, {'label_attr': {'class': 'form-label'}}) }}
+    {{ form_widget(form.place, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.place) }}
+</div>
+
+<button class="btn btn-primary">
+    {{ button_label|default('Zapisz') }}
+</button>
+
+{{ form_end(form) }}
