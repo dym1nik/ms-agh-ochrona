@@ -23,13 +23,5 @@ final class Version20260217105439 extends AbstractMigration
         $this->addSql('ALTER TABLE event ADD COLUMN author VARCHAR(255) DEFAULT NULL');
     }
 
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TEMPORARY TABLE __temp__event AS SELECT id, occurred_at, description, type, place, created_at, updated_at FROM event');
-        $this->addSql('DROP TABLE event');
-        $this->addSql('CREATE TABLE event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, occurred_at DATETIME NOT NULL, description VARCHAR(500) NOT NULL, type VARCHAR(50) NOT NULL, place VARCHAR(100) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL)');
-        $this->addSql('INSERT INTO event (id, occurred_at, description, type, place, created_at, updated_at) SELECT id, occurred_at, description, type, place, created_at, updated_at FROM __temp__event');
-        $this->addSql('DROP TABLE __temp__event');
-    }
+    
 }

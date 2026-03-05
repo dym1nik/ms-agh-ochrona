@@ -25,10 +25,5 @@ final class Version20260216121253 extends AbstractMigration
         $this->addSql('CREATE INDEX IDX_75EA56E0FB7336F0E3BD61CE16BA31DBBF396750 ON messenger_messages (queue_name, available_at, delivered_at, id)');
     }
 
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP TABLE event');
-        $this->addSql('DROP TABLE messenger_messages');
-    }
+    
 }

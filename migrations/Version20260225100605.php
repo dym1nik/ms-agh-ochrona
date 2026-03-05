@@ -24,13 +24,5 @@ final class Version20260225100605 extends AbstractMigration
         $this->addSql("UPDATE event SET status = 'new' WHERE status IS NULL OR status = ''");
     }
 
-    public function down(Schema $schema): void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE TEMPORARY TABLE __temp__event AS SELECT id, occurred_at, description, type, place, author, created_at, updated_at FROM event');
-        $this->addSql('DROP TABLE event');
-        $this->addSql('CREATE TABLE event (id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, occurred_at DATETIME NOT NULL, description VARCHAR(500) NOT NULL, type VARCHAR(50) NOT NULL, place VARCHAR(100) NOT NULL, author VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL)');
-        $this->addSql('INSERT INTO event (id, occurred_at, description, type, place, author, created_at, updated_at) SELECT id, occurred_at, description, type, place, author, created_at, updated_at FROM __temp__event');
-        $this->addSql('DROP TABLE __temp__event');
-    }
+    
 }
