@@ -1,0 +1,65 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit event{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold">
+            Edytuj zdarzenie #{{ event.id }}
+        </h1>
+
+        <a href="{{ path('app_event_index') }}" class="btn btn-outline-secondary">
+            ← Powrót do listy
+        </a>
+    </div>
+
+    <div class="card shadow-sm">
+        <div class="card-body">
+
+            {{ form_start(form) }}
+
+            <div class="row g-3">
+
+                <div class="col-md-6">
+                    {{ form_row(form.occurredAt) }}
+                </div>
+
+                <div class="col-md-6">
+                    {{ form_row(form.type) }}
+                </div>
+
+                <div class="col-md-12">
+                    {{ form_row(form.description) }}
+                </div>
+
+                <div class="col-md-12">
+                    {{ form_row(form.place) }}
+                </div>
+
+                {% if form.status is defined %}
+                    <div class="col-md-6">
+                        {{ form_row(form.status) }}
+                    </div>
+                {% endif %}
+
+            </div>
+
+            <div class="mt-4 d-flex gap-2">
+                <button class="btn btn-primary">
+                    Zapisz zmiany
+                </button>
+
+                <a href="{{ path('app_event_index') }}" class="btn btn-outline-secondary">
+                    Anuluj
+                </a>
+            </div>
+
+            {{ form_end(form) }}
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

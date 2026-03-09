@@ -1,0 +1,13 @@
+<form
+    method="post"
+    action="{{ path('app_event_delete', {id: event.id}) }}"
+    data-controller="confirm"
+    data-confirm-message-value="Na pewno chcesz usunąć to zdarzenie?"
+    data-action="submit->confirm#submit"
+>
+    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
+
+    <button class="btn btn-sm btn-outline-danger">
+        Usuń
+    </button>
+</form>

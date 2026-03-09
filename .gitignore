@@ -1,0 +1,22 @@
+### Symfony ###
+/var/
+/vendor/
+/public/bundles/
+/public/assets/
+/assets/vendor/
+
+### PHPUnit ###
+/.phpunit.cache/
+/phpunit.xml
+
+### Environment files ###
+.env
+.env.local
+.env.dev
+.env.test
+.env.*.local
+.env.dev.local
+.env.test.local
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
