@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security\Voter;
 
 use App\Entity\Event;
@@ -9,8 +11,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 final class EventVoter extends Voter
 {
-    public const EDIT = 'EVENT_EDIT';
-    public const DELETE = 'EVENT_DELETE';
+    public const EDIT = 'EDIT';
+    public const DELETE = 'DELETE';
 
     protected function supports(string $attribute, mixed $subject): bool
     {
@@ -34,14 +36,14 @@ final class EventVoter extends Voter
         }
 
         // USER tylko swoje
-        $identifier = method_exists($user, 'getUserIdentifier') ? $user->getUserIdentifier() : (string) $user;
+        $identifier = method_exists($user, 'getUserIdentifier')
+            ? $user->getUserIdentifier()
+            : (string) $user;
+
         if ($event->getAuthor() !== $identifier) {
             return false;
         }
 
-        // USER tylko do 24h od utworzenia
-        $limit = (new \DateTimeImmutable())->sub(new \DateInterval('PT24H'));
-
-        return $event->getCreatedAt() >= $limit;
+        return $event->isFresh();
     }
 }

@@ -53,9 +53,7 @@
         <a href="{{ path('app_event_edit', {'id': event.id}) }}" class="btn btn-sm btn-outline-warning">Edit</a>
 
         <form method="post"
-              action="{{ path('app_event_delete', {'id': event.id}) }}"
-              style="display:inline;"
-              onsubmit="return confirm('Na pewno usunąć?');">
+      action="{{ path('app_event_delete', {id: event.id}) }}">
             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ event.id) }}">
             <button class="btn btn-outline-danger btn-sm">
     🗑 Delete

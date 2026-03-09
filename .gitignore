@@ -17,3 +17,6 @@
 .env.*.local
 .env.dev.local
 .env.test.local
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

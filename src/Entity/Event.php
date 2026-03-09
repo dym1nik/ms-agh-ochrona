@@ -49,6 +49,13 @@ class Event
         $this->updatedAt = new \DateTimeImmutable();
     }
 
+    public function isFresh(\DateInterval $interval = new \DateInterval('PT24H')): bool
+    {
+    $limit = (new \DateTimeImmutable())->sub($interval);
+
+    return $this->createdAt >= $limit;
+    }
+
     public function getId(): ?int
     {
         return $this->id;
