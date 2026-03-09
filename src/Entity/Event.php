@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Repository\EventRepository;
@@ -47,13 +49,6 @@ class Event
     public function touch(): void
     {
         $this->updatedAt = new \DateTimeImmutable();
-    }
-
-    public function isFresh(\DateInterval $interval = new \DateInterval('PT24H')): bool
-    {
-    $limit = (new \DateTimeImmutable())->sub($interval);
-
-    return $this->createdAt >= $limit;
     }
 
     public function getId(): ?int
@@ -139,5 +134,22 @@ class Event
     public function setUpdatedAt(\DateTimeImmutable $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    public function isFresh(): bool
+    {
+        $limit = (new \DateTimeImmutable())->sub(new \DateInterval('PT24H'));
+
+        return $this->createdAt >= $limit;
+    }
+
+    public function getStatusLabel(): string
+    {
+        return match ($this->status) {
+            'new' => 'Nowe',
+            'in_progress' => 'W trakcie',
+            'closed' => 'Zamknięte',
+            default => $this->status,
+        };
     }
 }

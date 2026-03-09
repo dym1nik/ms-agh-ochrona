@@ -29,7 +29,6 @@ final class EventController extends AbstractController
 
         return $this->render('event/index.html.twig', [
             'events' => $this->eventRepository->findAll(),
-            // żeby w twig nie wołać is_granted w pętli
             'isAdmin' => $this->isGranted('ROLE_ADMIN'),
             'currentUserIdentifier' => $user?->getUserIdentifier(),
         ]);
@@ -45,7 +44,7 @@ final class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $event->setAuthor($this->getUser()->getUserIdentifier());
+            $event->setAuthor($this->getUser()?->getUserIdentifier());
 
             $this->entityManager->persist($event);
             $this->entityManager->flush();
@@ -61,7 +60,7 @@ final class EventController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_event_show', methods: ['GET'])]
+    #[Route('/{id}', name: 'app_event_show')]
     public function show(Event $event): Response
     {
         $this->denyAccessUnlessGranted('ROLE_USER');
@@ -80,12 +79,12 @@ final class EventController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-        $event->touch();
-        $this->entityManager->flush();
+            $event->touch();
+            $this->entityManager->flush();
 
-        $this->addFlash('success', 'Zdarzenie zaktualizowane.');
+            $this->addFlash('success', 'Zdarzenie zaktualizowane.');
 
-        return $this->redirectToRoute('app_event_index');
+            return $this->redirectToRoute('app_event_index');
         }
 
         return $this->render('event/edit.html.twig', [
